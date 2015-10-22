@@ -1,0 +1,25 @@
+{
+  "name": "bower-power",
+  "version": "0.0.0",
+  "description": "Bower Power! Supercharging Front-End Manageability",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecarlisle/bower-power.git"
+  },
+  "keywords": [
+    "Bower"
+  ],
+  "author": "Eric Carlisle <eric@ericcarlisle.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ecarlisle/bower-power/issues"
+  },
+  "homepage": "https://github.com/ecarlisle/bower-power#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
