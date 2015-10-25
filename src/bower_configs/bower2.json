@@ -1,0 +1,32 @@
+{
+  "name": "bower-power",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ecarlisle/bower-power",
+  "authors": [
+    "Eric Carlisle <eric@ericcarlisle.com>"
+  ],
+  "description": "Bower Power! Supercharging Front-End Manageability",
+  "main": "",
+  "keywords": [
+    "Bower",
+    "Bower Training"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "mustache.js": "mustache#~2.2.0",
+    "backbone": "~1.2.3",
+    "font-awesome": "~4.4.0"
+  },
+  "devDependencies": {
+    "modernizr": "~3.1.0"
+  }
+}
