@@ -19,6 +19,7 @@
   "homepage": "https://github.com/ecarlisle/bower-power#readme",
   "devDependencies": {
     "del": "^2.0.2",
+    "grunt-wiredep": "^2.0.0",
     "gulp": "^3.9.0",
     "gulp-bower": "0.0.10",
     "gulp-bower-normalize": "^1.0.6",

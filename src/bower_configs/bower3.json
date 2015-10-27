@@ -30,16 +30,6 @@
     "modernizr": "~3.1.0"
   },
   "install": {
-    "path": {
-      "js": "assets/js",
-      "css": "assets/css",
-      "less": "assets/less",
-      "scss": "assets/scss",
-      "eot": "assets/fonts",
-      "svg": "assets/fonts",
-      "ttf": "assets/fonts",
-      "woff": "assets/fonts",
-      "woff2": "assets/fonts"
-    }
+    "path": "assets"
   }
 }

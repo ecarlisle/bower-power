@@ -7,6 +7,7 @@ var gulp = require('gulp'),
   filter = require('gulp-filter'),
   exec = require('child_process').exec,
   minify_css = require('gulp-minify-css'),
+  rename = require('gulp-rename');
   sourcemaps = require('gulp-sourcemaps'),
   strip_css_comments = require('gulp-strip-css-comments'),
   main_bower_files = require('main-bower-files');
@@ -136,21 +137,30 @@ gulp.task('watch', function() {
 
 // Get bower after initial config.
 gulp.task('bower1', function() {
-  return gulp.src('src/bower_configs/bower1.png')
+  return gulp.src('src/bower_configs/bower1.json')
     .pipe(rename('bower.json'))
     .pipe(gulp.dest('.'));
 });
 
 // Get bower after determining dependencies config.
 gulp.task('bower2', function() {
-  return gulp.src('src/bower_configs/bower1.png')
-    .pipe(gulp.dest('assets/img'));
+  return gulp.src('src/bower_configs/bower2.json')
+    .pipe(rename('bower.json'))
+    .pipe(gulp.dest('.'));
 });
 
-// Get bower with a simple bower-installer config.
+// Use for simple version of Bower Installer.
 gulp.task('bower3', function() {
-  return gulp.src('src/bower_configs/bower3.png')
-    .pipe(gulp.dest('assets/img'));
+  return gulp.src('src/bower_configs/bower3.json')
+    .pipe(rename('bower.json'))
+    .pipe(gulp.dest('.'));
+});
+
+// Use for additional version of Bower Installer.
+gulp.task('bower4', function() {
+  return gulp.src('src/bower_configs/bower4.json')
+    .pipe(rename('bower.json'))
+    .pipe(gulp.dest('.'));
 });
 
 // --- Utility functions --- //

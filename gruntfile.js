@@ -1,6 +1,17 @@
 module.exports = function(grunt) {
-
-  grunt.loadNpmTasks('grunt-bower');
-
-
+  grunt.initConfig({
+    wiredep: {
+      task: {
+        src: [
+          'index.html'
+        ],
+        options: {
+          {'directory':'bower_components'},
+          {'dependencies': true},
+          {'devDependencies': false}
+        }
+      }
+    }
+  });
+  grunt.loadNpmTasks('grunt-wiredep');
 };
