@@ -28,5 +28,8 @@
   },
   "devDependencies": {
     "modernizr": "~3.1.0"
+  },
+  "install": {
+    "path": "assets"
   }
 }

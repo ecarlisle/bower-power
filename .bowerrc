@@ -1,3 +1,10 @@
 {
-  "directory": "bower_components/"
+  "analytics": false,
+  "timeout": 300000,
+  "registry": {
+    "search": [
+      "http://localhost:5678",
+      "https://bower.herokuapp.com"
+    ]
+  }
 }
