@@ -5,11 +5,11 @@ module.exports = function(grunt) {
         src: [
           'index.html'
         ],
-        options: {
+        options: [
           {'directory':'bower_components'},
           {'dependencies': true},
           {'devDependencies': false}
-        }
+        ]
       }
     }
   });
