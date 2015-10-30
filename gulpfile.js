@@ -1,45 +1,40 @@
 var gulp = require('gulp'),
   del = require('del'),
-  bower = require('gulp-bower'),
   filter = require('gulp-filter'),
   concat = require('gulp-concat'),
   uglify = require('gulp-uglify'),
   filter = require('gulp-filter'),
   exec = require('child_process').exec,
   minify_css = require('gulp-minify-css'),
-  rename = require('gulp-rename');
+  rename = require('gulp-rename'),
   sourcemaps = require('gulp-sourcemaps'),
   strip_css_comments = require('gulp-strip-css-comments'),
+  bower = require('gulp-bower'),
   main_bower_files = require('main-bower-files');
 
-// Cleans out dependencies in the /vendor folder.
-gulp.task('clean', function() {
+
+// Cleans out dependencies in the /assets folder.
+gulp.task('clean_assets', function() {
   return del('assets/**');
 });
 
-// Cleans out dependencies in the /vendor folder.
-gulp.task('rm_deps', function() {
-  return del('bower_components/**');
+// Uses "Bower" Gulp module to get all dependencies.
+gulp.task('get_dependencies', function() {
+  return bower({cmd: 'update'});
 });
 
-// Use Bower gulp module to download folders.
-gulp.task('get_deps', ['rm_deps'], function() {
-  return bower({
-    cmd: 'update'
-  });
-});
-
-// Use get-main-files module to place dependencies in /vendor.
-gulp.task('main_files_1', ['clean'], function() {
+// Use "get-main-files" Gulp module without options.
+// Gets default "main" file(s) for each dependency.
+gulp.task('main_files_1', ['get_dependencies'], function() {
   return gulp.src(main_bower_files(), {
       base: 'bower_components'
     })
     .pipe(gulp.dest('assets'));
 });
 
-// Use get-main-files module, but this time get fonts and CSS
-// Not indicated as a Bower "main" file.
-gulp.task('main_files_2', ['clean'], function() {
+// Use get-main-files Gulp module with an options.
+// Overrides "main" file(s) option for bootstrap and font-awesome.
+gulp.task('main_files_2', ['get_dependencies'], function() {
   return gulp.src(main_bower_files(
       {
         "overrides": {
@@ -63,10 +58,13 @@ gulp.task('main_files_2', ['clean'], function() {
     .pipe(gulp.dest('assets'));
 });
 
-// --- A typical-ish Gulp approach using multiple tasks --- //
+
+// --- A typical-ish simple Gulp approach using multiple tasks --- //
+// Note: Much (if not all) of the functionality of the following 
+// workflow can be done by pairing in the Gulp Bower modules.
 
 // Get and optimize all scripts. 
-gulp.task('scripts', ['clean'], function() {
+gulp.task('scripts', ['clean_assets'], function() {
 
   return gulp.src(['bower_components/jquery/dist/jquery.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
@@ -110,53 +108,37 @@ gulp.task('images', ['fonts'], function() {
     .pipe(gulp.dest('assets/img'));
 });
 
-// --- Build tasks using different approaches --- //
-
-gulp.task('build1', ['get_deps'], function() {
-  tree('bower_components -d -C -L 1');
-});
-
-gulp.task('build2', ['main_files_1'], function() {
-  tree('assets -C');
-});
-
-gulp.task('build3', ['main_files_2'], function() {
-  tree('assets -C');
-});
-
-gulp.task('build4', ['images'], function() {
-  tree('assets -C');
-});
-
-// --- The watcher --- //
-gulp.task('watch', function() {
-  gulp.watch('src/css/*.css', ['styles']);
+// --- Kick off the detailed Gulp build sequence. --- //
+gulp.task('default', ['images'], function() {
 });
 
 // --- Fetch different versions of the bower config --- //
 
-// Get bower after initial config.
+// Get a bower.json with the format you'd see after running "bower init".
 gulp.task('bower1', function() {
   return gulp.src('src/bower_configs/bower1.json')
     .pipe(rename('bower.json'))
     .pipe(gulp.dest('.'));
 });
 
-// Get bower after determining dependencies config.
+// Get a bower.json with the format you'd see after indicating dependencies
+// using "gump install"
 gulp.task('bower2', function() {
   return gulp.src('src/bower_configs/bower2.json')
     .pipe(rename('bower.json'))
     .pipe(gulp.dest('.'));
 });
 
-// Use for simple version of Bower Installer.
+// Get a bower.json with the format you'd see for the simplest configuration 
+// of the bower-installer command-line tool.
 gulp.task('bower3', function() {
   return gulp.src('src/bower_configs/bower3.json')
     .pipe(rename('bower.json'))
     .pipe(gulp.dest('.'));
 });
 
-// Use for additional version of Bower Installer.
+// Get a bower.json with the format you'd see for a more specific configuration  
+// of the bower-installer command-line tool.
 gulp.task('bower4', function() {
   return gulp.src('src/bower_configs/bower4.json')
     .pipe(rename('bower.json'))
@@ -165,7 +147,9 @@ gulp.task('bower4', function() {
 
 // --- Utility functions --- //
 
-// Utility functions.
+// Utility functions - good for viewing the assets folder 
+// structure if you have tree installed. Tree may be installed 
+// with brew, apt-get, etc...
 function tree(options) {
   exec('tree ' + options, function(err, stdout, stderr) {
     console.log(stdout);
