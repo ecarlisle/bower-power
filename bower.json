@@ -18,28 +18,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "dependencies": {
-    "jquery": "~2.1.4",
-    "bootstrap": "~3.3.5",
-    "mustache.js": "mustache#~2.2.0",
-    "backbone": "~1.2.3",
-    "font-awesome": "~4.4.0"
-  },
-  "devDependencies": {
-    "modernizr": "~3.1.0"
-  },
-  "install": {
-    "path": {
-      "js": "assets/js",
-      "css": "assets/css",
-      "less": "assets/less",
-      "scss": "assets/scss",
-      "eot": "assets/fonts",
-      "svg": "assets/fonts",
-      "ttf": "assets/fonts",
-      "woff": "assets/fonts",
-      "woff2": "assets/fonts"
-    }
-  }
+  ]
 }
